@@ -1,8 +1,14 @@
+const express = require('express');
+
 let noteTitle;
 let noteText;
 let saveNoteBtn;
 let newNoteBtn;
 let noteList;
+
+const PORT = 3001;
+
+const app = express();
 
 if (window.location.pathname === '/notes') {
   noteTitle = document.querySelector('.note-title');
@@ -181,3 +187,8 @@ if (window.location.pathname === '/notes') {
 }
 
 getAndRenderNotes();
+
+
+app.listen(PORT, () =>
+  console.log(`App listening at http://localhost:${PORT} 🚀`)
+);
