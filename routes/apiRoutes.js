@@ -3,22 +3,22 @@ const fs = require('fs');
 
 module.exports = (app) => {
 
-    app.get('/notes', (req, res) => {
+    app.get('api/notes', (req, res) => {
     res.sendFile(path.join(__dirname, '../db/db.json'));
     });
 
 
-    app.post('/notes', (req, res) => {
-    let db = fs.readFileSync('db/db.json');
-    db = JSON.parse(db);
-    res.json(db);
-    let userNote = {
+    app.post('api/notes', (req, res) => {
+    let note = fs.readFile('db/db.json');
+    note = JSON.parse(note);
+    res.json(note);
+    let newNote = {
         title: req.body.title,
         text: req.body.text,
         };
-    db.push(userNote);
-    fs.writeFileSync('db/db.json', JSON.stringify(db));
-    res.json(db);
+    note.push(newNote);
+    fs.writeFile('db/db.json', JSON.stringify(note));
+    res.json(note);
 
     });
 }
